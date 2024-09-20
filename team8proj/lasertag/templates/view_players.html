@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>View Players</title>
+</head>
+<body>
+    <h1>All Players</h1>
+    <ul>
+        {% for player in players %}
+        <li>ID: {{player.id}} | Codename: {{player.codename}}</li>
+        {% empty %}
+        <li>No players available</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html>
