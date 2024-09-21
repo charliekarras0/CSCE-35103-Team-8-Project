@@ -5,16 +5,20 @@ Team 8's repository for the group project
 | GitHub Username   | Name   |
 |------------|------------|
 | darias31 | Daria Stepanova |
-| Row 2, Col 1 | Row 2, Col 2 |
-| Row 3, Col 1 | Row 3, Col 2 |
+| victorberrios2341 | Victor Berrios |
+| charliekarras0 | Charlie Karras |
 
 # Laser Tag Game
 
-This project implements a Laser Tag game system with a Python/Flask backend and React frontend.
+This project implements a Laser Tag game system with a Python/Django backend.
 
 ## Setup Instructions
 
 1. Clone this repository
-2. Set up the backend:
+2. Make sure Python is installed on the operating system and run the requirements.txt file to download all necessary packages.
+
+```
+python pip install -r requirements.txt
+```
 
    
