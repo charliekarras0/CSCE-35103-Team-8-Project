@@ -23,9 +23,8 @@ This project implements a Laser Tag game system with a Python/Django backend.
       then once installed, "python3 -m venv nameofvenv"
       finally "source nameofvenv/bin/activate"
 5. Run, "pip install -r requirements.txt", to install necessary packages
-6. Run "deactivate" to deactivate venv
-7. Run "sudo apt install npm"
-8. Verify with commands "node -v" and "npm -v"
+6. "python app.py" to run application
+7. deactivate to quit application
 
 
 ```
