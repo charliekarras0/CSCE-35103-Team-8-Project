@@ -16,7 +16,7 @@ This project implements a Laser Tag game system with a Python/Django backend.
 ## Setup Instructions
 
 1. Clone this repository using ssh key
-2. Run "python3 --version" to verify python installation, if python not found run
+2. Run ```python3 --version``` to verify python installation, if python not found run
 ```sudo apt install python3```
 3. Install pip, run
 ```sudo apt install python3-pip```
