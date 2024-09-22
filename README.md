@@ -26,8 +26,7 @@ This project implements a Laser Tag game system with a Python/Django backend.
 6. Run "deactivate" to deactivate venv
 7. Run "sudo apt install npm"
 8. Verify with commands "node -v" and "npm -v"
-9. Find front "cd frontend"
-10. Run "npm start" to run application
+
 
 ```
 python3 -m pip install -r requirements.txt
