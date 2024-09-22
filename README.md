@@ -7,6 +7,7 @@ Team 8's repository for the group project
 | darias31 | Daria Stepanova |
 | victorberrios2341 | Victor Berrios |
 | charliekarras0 | Charlie Karras |
+| ludaChris2023 | Christopher Heffernan|
 
 # Laser Tag Game
 
