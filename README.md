@@ -30,5 +30,4 @@ This project implements a Laser Tag game system with a Python/Django backend.
       finally
    ```source nameofvenv/bin/activate```
 6. Run, ```pip install -r requirements.txt```, to install necessary packages
-7. deactivate to quit application
    
