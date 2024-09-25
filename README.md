@@ -8,6 +8,7 @@ Team 8's repository for the group project
 | victorberrios2341 | Victor Berrios |
 | charliekarras0 | Charlie Karras |
 | ludaChris2023 | Christopher Heffernan|
+| br1husong | Breck Husong |
 
 # Laser Tag Game
 
