@@ -1,9 +1,21 @@
 import tkinter as tk
 from PIL import Image, ImageTk  
+import sys 
 import os
+path = os.getcwd()
+split = path.split('/')
+path = split[:-1]
+path = '/'.join(path)
+
+sys.path.append(path)
+
+from networking.udp import UDP
 
 # Player entry window
 def create_player_entry_window():
+    print(os.getcwd())
+    global udp
+    udp = UDP()
     player_entry_window = tk.Tk()
     player_entry_window.title("Player Entry")
     player_entry_window.geometry("400x400")  #window size
@@ -39,7 +51,11 @@ def create_player_entry_window():
 # basic add player function
 def add_player(player_id, codename, equipment_id):
     print(f"Player Added: ID: {player_id}, Codename: {codename}, Equipment ID: {equipment_id}")
-
+    try:
+        global udp
+        udp.transmit_equipment_id(equipment_id=int(equipment_id))
+    except ValueError:
+        print("Equipment ID must be an integer")
 # splash screen
 def splash_screen():
     splash = tk.Tk()
