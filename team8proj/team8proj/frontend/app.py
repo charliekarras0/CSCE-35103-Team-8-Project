@@ -1,7 +1,7 @@
 import os
 import sys
-import tkinter as tk  # Ensure tkinter is imported
-from PIL import Image, ImageTk  # Ensure PIL is imported
+import tkinter as tk  
+from PIL import Image, ImageTk 
 
 import django  # Import Django
 
@@ -74,7 +74,7 @@ def add_player(player_id, codename, equipment_id):
         
 # Splash screen
 def splash_screen():
-    splash = tk.Tk()  # Ensure tkinter is being used here
+    splash = tk.Tk()  
     splash.title("Splash Screen")
     splash.geometry("400x400") 
     
