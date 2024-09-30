@@ -30,4 +30,19 @@ This project implements a Laser Tag game system with a Python/Django backend.
       finally
    ```source nameofvenv/bin/activate```
 6. Run, ```pip install -r requirements.txt```, to install necessary packages
-   
+7. Set up the database by running, ```python manage.py migrate```
+9. Run the application by running, ```python manage.py runserver```, visit http://127.0.0.1:8000/ in your web browser to access the application
+
+## How to play
+1. Launch the application.
+   - Open **two instances of the terminal**:
+     - In the **first terminal**, naviagate to the first team8proj directory and start the database server:
+       ```
+       cd path/to/CSCE-35103-Team-8-Project/team8proj
+       python manage.py runserver```
+     - In the **second terminal**, navigate to the frontend directory and run the front end:
+       ```
+       cd path/to/CSCE-35103-Team-8-Project/team8proj/team8proj/frontend
+       python3 app.py```
+2. Use the player entry screen to add players by entering their IDs and codenames.
+3. Players will be added to the database and can be viewed through the player viewing screen.
