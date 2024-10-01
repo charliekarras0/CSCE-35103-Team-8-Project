@@ -43,7 +43,7 @@ This project implements a Laser Tag game system with a Python/Django backend.
        ```
      - In the **second terminal**, navigate to the frontend directory and run the front end:
        ```
-       cd path/to/CSCE-35103-Team-8-Project/team8proj/team8proj/frontend
+       cd path/to/CSCE-35103-Team-8-Project/team8proj/frontend
        python3 app.py
        ```
 2. Use the player entry screen to add players by entering their IDs and codenames.
