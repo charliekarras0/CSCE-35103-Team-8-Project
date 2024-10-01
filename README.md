@@ -22,7 +22,7 @@ This project implements a Laser Tag game system with a Python/Django backend.
 ```sudo apt install python3```
 4. Install pip, run
 ```sudo apt install python3-pip```
-5. Create virtual environment, go to where the project was cloned in terminal using cd "path/to/project"
+5. (Optional) Create virtual environment, go to where the project was cloned in terminal using cd "path/to/project"
       run
    ```sudo apt install python3.11-venv```
       then once installed,
