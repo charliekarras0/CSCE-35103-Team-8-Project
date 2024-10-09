@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaserTag HUD</title>
+    <style>
+        .team {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            padding: 20px;
+        }
+        .team h2 {
+            text-align: center;
+        }
+        .team ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .team ul li {
+            padding: 10px;
+            background-color: #f4f4f4;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>LaserTag HUD</h1>
+    <div class="team">
+        <h2>Red Team</h2>
+        <ul>
+            {% for player in red_team %}
+                <li>{{ player.codename }}</li>
+            {% empty %}
+                <li>No players in Red Team</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="team">
+        <h2>Blue Team</h2>
+        <ul>
+            {% for player in blue_team %}
+                <li>{{ player.codename }}</li>
+            {% empty %}
+                <li>No players in Blue Team</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h4>Press F12 to clean out players</h4>
+</body>
+</html>

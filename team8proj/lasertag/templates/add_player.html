@@ -9,6 +9,13 @@
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
+        
+        <label for="team">Team:</label>
+		<select name="team" id="team">
+			<option value="Red">Red Team</option>
+			<option value="Blue">Blue Team</option>
+		</select>
+        
         <button type="submit">Add Player</button>
     </form>
 </body>
