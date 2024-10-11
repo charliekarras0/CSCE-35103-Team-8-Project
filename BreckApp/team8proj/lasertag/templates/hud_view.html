@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaserTag Scoreboard</title>
+    <!-- Google Font for Arcade Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive; /* Apply retro font */
+            background-color: #1c1c1c; /* Dark background for a retro feel */
+            color: #ffffff; /* White text color */
+            text-align: center; /* Center align text */
+            padding: 20px; /* General padding */
+        }
+
+        h1 {
+            font-size: 36px; /* Title size */
+            margin-bottom: 20px; /* Space below title */
+        }
+
+        .team {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        .red-team {
+            background-color: #ff4d4d; /* Red team background */
+        }
+
+        .blue-team {
+            background-color: #4d94ff; /* Blue team background */
+        }
+
+        .team h2 {
+            text-align: center;
+            font-size: 24px; /* Size for team headers */
+            margin-bottom: 10px; /* Space below headers */
+        }
+
+        .team ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .team ul li {
+            padding: 10px;
+            background-color: #ffffff; /* White list items */
+            margin: 5px 0;
+            border-radius: 5px; /* Rounded corners for list items */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+            color: black; /* Change the font color of player names to black */
+        }
+
+        .message-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8); /* Darker background for messages */
+            color: #00ff00; /* Green text for messages */
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            max-height: 150px; /* Set a fixed height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            width: 80%; /* Adjust the width as needed */
+        }
+
+        .message {
+            margin-bottom: 5px; /* Add space between messages */
+        }
+    </style>
+</head>
+<body>
+    <h1>LaserTag HUD</h1>
+
+    <div class="team red-team">
+        <h2>Red Team</h2>
+        <ul>
+            {% for player in red_team %}
+                <li>{{ player.codename }}</li>
+            {% empty %}
+                <li>No players in Red Team</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="team blue-team">
+        <h2>Blue Team</h2>
+        <ul>
+            {% for player in blue_team %}
+                <li>{{ player.codename }}</li>
+            {% empty %}
+                <li>No players in Blue Team</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="hud-container">
+        <!-- Message container at the bottom -->
+        <div class="message-container" id="message-container"></div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        function displayMessage(message) {
+            var messageContainer = document.getElementById('message-container');
+
+            // Create a new div for each message
+            var newMessage = document.createElement('div');
+            newMessage.classList.add('message');
+            newMessage.innerHTML = message;
+
+            // Append the new message to the message container
+            messageContainer.appendChild(newMessage);
+
+            // Scroll to the bottom to show the latest message
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+
+        // Loop through the messages passed from the backend and display each one
+        {% for message in hit_messages %}
+            displayMessage("{{ message }}");
+        {% endfor %}
+    </script>
+</body>
+</html>
