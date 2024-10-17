@@ -103,30 +103,16 @@
         {% csrf_token %}
         {{ form.as_p }}
         
-        <label for="team">Team:</label>
-        <select name="team" id="team" onchange="updateColor()">
-            <option value="Red">Red Team</option>
-            <option value="Blue">Blue Team</option>
-        </select>
+        
         
         <button type="submit">Add Player</button>
     </form>
     <a href="{% url 'index' %}" class="home-button">Back to Home</a> <!-- Home Button -->
 
     <script>
-        function updateColor() {
-            const select = document.getElementById('team');
-            if (select.value === 'Red') {
-                select.classList.add('red');
-                select.classList.remove('blue');
-            } else if (select.value === 'Blue') {
-                select.classList.add('blue');
-                select.classList.remove('red');
-            }
-        }
+        
 
-        // Initialize the dropdown color on page load
-        document.addEventListener('DOMContentLoaded', updateColor);
+        
     </script>
 </body>
 </html>
