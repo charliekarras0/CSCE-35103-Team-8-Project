@@ -130,7 +130,7 @@ def add_player(request):
                 return redirect('/add_player/')  # Redirect to the same page
             player = form.save(commit=True)  # Save the player object and commit to DB
           
-            team_name = request.POST.get('team')  # Get team from the form data
+            """team_name = request.POST.get('team')  # Get team from the form data
             add_player_to_team(player.id, team_name)  # Add player to the in-memory team
             score_storage[player.id] = 0
             
@@ -138,8 +138,8 @@ def add_player(request):
             equipment_id = equipment_storage.get(player.id)
             
             broadcast_udp_message(f"{equipment_id}") # Transmitting startup code to equipment
-            
-            messages.success(request, f"Success: Player '{codename}' has been added to the {team_name} team.")
+            """
+            messages.success(request, f"Success: Player '{codename}' has been added.")
             return redirect('/index')  # Redirect to HUD view after adding the player
     else:
         form = PlayerForm()
