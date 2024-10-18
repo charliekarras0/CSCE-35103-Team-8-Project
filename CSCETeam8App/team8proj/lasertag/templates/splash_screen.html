@@ -1,1 +1,38 @@
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splash Screen</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black; /* Fallback background color */
+        }
+
+	.splash-image {
+		width: 100%;
+		height: 100%;
+		object-image: url("{% static 'lasertag/logo.jpg' %}");
+		object-fit: cover;
+		object-position: center;
+		border: 2px solid red; /* Temporary for debugging */
+	}
+    </style>
+    <script>
+        // Redirect to the index page after 3 seconds
+        setTimeout(function() {
+            window.location.href = "{% url 'index' %}"; // Change 'index' to your index view name
+        }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
+</head>
+<body>
+    <img src="{% static 'lasertag/logo.jpg' %}" alt="Splash Image" style="width:100%; height:100%; object-fit:contain;">
+</body>
+</html>
