@@ -2,49 +2,40 @@
 Team 8's repository for the group project
 
 # Github Usernames / Real Names
-| GitHub Username   | Name   |
-|------------|------------|
-| darias31 | Daria Stepanova |
-| victorberrios2341 | Victor Berrios |
-| charliekarras0 | Charlie Karras |
-| ludaChris2023 | Christopher Heffernan|
-| br1husong | Breck Husong |
+| GitHub Username   | Name                 |
+|-------------------|----------------------|
+| darias31          | Daria Stepanova      |
+| victorberrios2341 | Victor Berrios       |
+| charliekarras0    | Charlie Karras       |
+| ludaChris2023     | Christopher Heffernan|
+| br1husong         | Breck Husong         |
 
 # Laser Tag Game
 
-This project implements a Laser Tag game system with a Python/Django backend.
+This project implements a Laser Tag game system with a Python/Django webpage app.
 
 ## Setup Instructions
 
 1. Clone this repository using ssh key https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent, ```git clone git@github.com:charliekarras0/CSCE-35103-Team-8-Project.git```
-2. Open project ```cd CSCE-35103-Team-8-Project```
-3. Run ```python3 --version``` to verify python installation, if python not found run
-```sudo apt install python3```
-4. Install pip, run
-```sudo apt install python3-pip```
-5. (Optional) Create virtual environment, go to where the project was cloned in terminal using cd "path/to/project"
-      run
-   ```sudo apt install python3.11-venv```
-      then once installed,
-   ```python3 -m venv nameofvenv```
-      finally
-   ```source nameofvenv/bin/activate```
-6. Run, ```pip install -r requirements.txt```, to install necessary packages
-7. Set up the database by going to ```cd path/to/CSCE-35103-Team-8-Project/team8proj``` and running, ```python manage.py migrate```
-9. Run the application by running, ```python manage.py runserver```, visit http://127.0.0.1:8000/ in your web browser to access the application
-
-## How to play
-1. Launch the application.
-   - Open **two instances of the terminal** (Make sure the python virtual environment has been activated in both terminals):
-     - In the **first terminal**, naviagate to the first team8proj directory and start the database server:
-       ```
-       cd path/to/CSCE-35103-Team-8-Project/team8proj
-       python manage.py runserver
-       ```
-     - In the **second terminal**, navigate to the frontend directory and run the front end:
-       ```
-       cd path/to/CSCE-35103-Team-8-Project/team8proj/frontend
-       python3 app.py
-       ```
-2. Use the player entry screen to add players by entering their IDs and codenames.
-3. Players will be added to the database and can be viewed through the player viewing screen.
+	Alternatively, just download the file CSCETeam8App as a zip file and extract it to CSCETeam8App
+2. Open project 
+	Run: cd Downloads/CSCETeam8App/
+	*Assuming you downloaded the file into the Downloads folder. If not, adapt appropriately: cd path_to_dir/CSCETeam8App/*
+3. Install python
+	Run: sudo apt install python3
+4. Install pip 
+	Run: sudo apt install python3-pip
+5. Create virtual environment
+    Run: sudo apt install python3.11-venv
+    Run: python3 -m venv photonvenv
+    Run: source photonvenv/bin/activate
+6. Install necessary packages
+	Run: pip install -r requirements.txt
+7. Prime django for the database *Note that this doesn't effect the postgres database, it only tells Django how the database is formatted. This can be confirmed through the postgres terminal*:
+	Run: cd team8proj/
+	Run: python manage.py migrate
+		if this draws an error, 
+			run: python manage.py migrate --fake
+8. Start application:
+	Run: python manage.py runserver
+    Visit http://127.0.0.1:8000/ in your web browser to access the application
