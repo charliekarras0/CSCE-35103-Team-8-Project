@@ -218,6 +218,11 @@ def assign_teams_equipment(request):
             if player in team_storage.get(other_team, []):
                 messages.error(request, f"Error: Player '{player.codename}' cannot be assigned to both teams.")
                 return redirect('/assign_teams_equipment/')  # Redirect to the same page
+            
+            # Check if equipment ID is already in use
+            if equipment_id in equipment_storage.values():
+                messages.error(request, 'This equipment ID is already assigned to another player.')
+                return redirect('assign_teams_equipment')  # Redirect back to the form
 
             # Assign the player to the specified team
             if team_name in team_storage:
