@@ -4,96 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <!-- Google Font for Arcade Style -->
+    <!-- Google Font for retro arcade style -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* Basic styling for the page layout */
         body {
-            font-family: 'Press Start 2P', cursive; /* Apply retro font */
-            background-color: #1c1c1c; /* Dark background for a retro feel */
-            color: #ffffff; /* White text color */
-            text-align: center; /* Center align text */
-            padding: 20px; /* General padding */
-            height: 100vh; /* Full viewport height */
-            display: flex; /* Use flexbox for centering */
-            flex-direction: column; /* Vertical layout */
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
+            font-family: 'Press Start 2P', cursive;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1c1c1c, #333333); /* Gradient background */
+            animation: backgroundAnim 10s infinite alternate; /* Background animation */
         }
 
+        /* Background animation keyframes */
+        @keyframes backgroundAnim {
+            0% { background: linear-gradient(135deg, #1c1c1c, #333333); }
+            100% { background: linear-gradient(135deg, #333333, #1c1c1c); }
+        }
+
+        /* Header styling */
         h1 {
-            font-size: 36px; /* Title size */
-            margin-bottom: 20px; /* Space below title */
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
+        /* Link button styling */
         a {
-            text-decoration: none; /* Remove underline from links */
-            color: #00ff00; /* Green color for links */
-            font-size: 24px; /* Font size for links */
-            padding: 10px 20px; /* Padding for links */
-            border: 2px solid #00ff00; /* Green border for links */
-            border-radius: 5px; /* Rounded corners */
-            margin: 10px; /* Space around links */
-            display: inline-block; /* Make links block elements */
-            transition: background-color 0.3s, color 0.3s; /* Transition for hover effect */
+            text-decoration: none;
+            color: #00ff00;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s;
         }
 
+        /* Link hover effect */
         a:hover {
-            background-color: #00ff00; /* Change background on hover */
-            color: #1c1c1c; /* Change text color on hover */
+            background-color: #00ff00;
+            color: #1c1c1c;
         }
 
+        /* Styling for the "Start Game" button */
         .start-button {
-            width: 300px; /* Set a fixed width for the button */
-            font-size: 36px; /* Extra-large font size */
-            padding: 20px; /* Padding for the button */
-            background: linear-gradient(90deg, #ffcc00, #ff8c00); /* More extreme gradient from bright yellow to dark gold */
-            border: none; /* Remove border */
-            color: #1c1c1c; /* Dark text color for button */
-            cursor: pointer; /* Pointer cursor on hover */
-            transition: background 0.5s, box-shadow 0.3s; /* Smooth transition for background and shadow */
-            margin-top: 20px; /* Space above the button */
-            border-radius: 10px; /* Rounded corners for button */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+            width: 300px;
+            font-size: 36px;
+            padding: 20px;
+            background: linear-gradient(90deg, #ffcc00, #ff8c00);
+            border: none;
+            color: #1c1c1c;
+            cursor: pointer;
+            transition: background 0.5s, box-shadow 0.3s, transform 0.2s;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
+        /* Button hover effect with neon glow */
         .start-button:hover {
-            background: linear-gradient(90deg, #ff8c00, #ffcc00); /* Reverse gradient on hover */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7); /* Enhanced shadow on hover for a shiny effect */
-            color: #1c1c1c; /* Keep dark text color on hover */
+            background: linear-gradient(90deg, #ff8c00, #ffcc00);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px #ffcc00, 0 0 30px #ff8c00;
+            transform: scale(1.05);
         }
 
+        /* Container for teams */
         .teams-container {
-            display: flex; /* Use flexbox to layout teams side by side */
-            justify-content: center; /* Center teams horizontally */
-            width: 100%; /* Full width */
-            margin-top: 20px; /* Space above teams */
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
         }
 
+        /* Individual team styling */
         .team {
-            width: 45%; /* Set a width for each team column */
-		padding: 20px;
-		border-radius: 8px; /* Rounded corners */
-		overflow-y: auto; /* Enable vertical scrolling */
-		max-height: 300px; /* Set a maximum height */
-		margin-top: 20px; /* Space above teams */
-		text-align: left; /* Align text to the left */
-		display: inline-block; /* Align columns side by side */
-		vertical-align: top; /* Align the top of the columns */
+            width: 45%;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-y: auto;
+            max-height: 300px;
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
         }
 
+        /* Background colors for teams */
         .red-team {
-            background-color: #ff4d4d; /* Red team background */
+            background-color: #ff4d4d;
         }
 
         .blue-team {
-            background-color: #4d94ff; /* Blue team background */
+            background-color: #4d94ff;
         }
 
+        /* Styling for team headers */
         .team h2 {
-            font-size: 24px; /* Size for team headers */
-            margin-bottom: 10px; /* Space below headers */
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
+        /* Styling for the list of players */
         .team ul {
             list-style-type: none;
             padding: 0;
@@ -101,46 +119,61 @@
 
         .team ul li {
             padding: 10px;
-            background-color: #ffffff; /* White list items */
+            background-color: #ffffff;
             margin: 5px 0;
-            border-radius: 5px; /* Rounded corners for list items */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-            color: black; /* Set the color of the player codename to black */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: auto;
+            color: #888888;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <h1>Welcome!</h1>
-    <a href="/add_player">Add Player</a>
-    <a href="/view_players">View Players</a>
-    <a href="/assign_teams_equipment">Assign Teams and Equipment</a>
-    <a href="/remove_players">Clear Current Players</a>
-    <button class="start-button" onclick="window.location.href='/hud/'">Start Game</button> <!-- Centered Start Game Button -->
+    <!-- Navigation links -->
+    <a href="/add_player" title="Add a new player">Add Player</a>
+    <a href="/view_players" title="View the list of players">View Players</a>
+    <a href="/assign_teams_equipment" title="Assign teams and equipment to players">Assign Teams and Equipment</a>
+    <a href="/remove_players" title="Remove all current players">Clear Current Players</a>
+    <!-- Button to start the game -->
+    <button class="start-button" onclick="window.location.href='/hud/';" title="Start the game">Start Game</button>
 
-	<div style="display: flex; justify-content: space-around; width: 100%;">
-    <div class="teams-container">
-        <div class="team red-team">
-            <h2>Red Team</h2>
-            <ul>
-                {% for player in red_team %}
-                    <li>{{ player.codename }}</li>  <!-- Removed Equipment ID -->
-                {% empty %}
-                    <li>No players in Red Team</li>
-                {% endfor %}
-            </ul>
-        </div>
+    <!-- Display team lists -->
+    <div style="display: flex; justify-content: space-around; width: 100%;">
+        <div class="teams-container">
+            <div class="team red-team">
+                <h2>Red Team</h2>
+                <ul>
+                    {% for player in red_team %}
+                        <li>{{ player.codename }}</li>
+                    {% empty %}
+                        <li>No players in Red Team</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-        <div class="team blue-team">
-            <h2>Blue Team</h2>
-            <ul>
-                {% for player in blue_team %}
-                    <li>{{ player.codename }}</li>  <!-- Removed Equipment ID -->
-                {% empty %}
-                    <li>No players in Blue Team</li>
-                {% endfor %}
-            </ul>
+            <div class="team blue-team">
+                <h2>Blue Team</h2>
+                <ul>
+                    {% for player in blue_team %}
+                        <li>{{ player.codename }}</li>
+                    {% empty %}
+                        <li>No players in Blue Team</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
-    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Retro Game. All Rights Reserved.
+    </footer>
 </body>
 </html>
