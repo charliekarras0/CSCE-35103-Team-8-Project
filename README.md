@@ -19,8 +19,8 @@ This project implements a Laser Tag game system with a Python/Django webpage app
 1. Clone this repository using ssh key https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent, ```git clone git@github.com:charliekarras0/CSCE-35103-Team-8-Project.git```
 	Alternatively, just download the file CSCETeam8App as a zip file and extract it to CSCETeam8App
 2. Open project 
-	Run: cd Downloads/CSCETeam8App/
-	*Assuming you downloaded the file into the Downloads folder. If not, adapt appropriately: cd path_to_dir/CSCETeam8App/*
+	Run: cd Downloads/CSCETeam8App/CSCETeam8App/
+	*Assuming you downloaded the file into the Downloads folder. If not, adapt appropriately: cd path_to_dir/CSCETeam8App/CSCETeam8App*
 3. Install python
 	Run: sudo apt install python3
 4. Install pip 
