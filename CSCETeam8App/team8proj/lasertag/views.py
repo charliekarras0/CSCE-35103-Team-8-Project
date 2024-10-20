@@ -250,9 +250,11 @@ def assign_teams_equipment(request):
 
 def remove_players(request):
     # Clear the team and equipment storage
-    team_storage.clear()
-    equipment_storage.clear()
-    # Optionally, you can display a success message
+    for key in team_storage:
+        team_storage[key] = []  # Assign an empty list to each key
+    for key in equipment_storage:
+        equipment_storage[key] = []  # Assign an empty list to each key
+
     messages.success(request, "All players have been removed from the current game.")
     return redirect('index')  # Redirect to the index page after clearing
     
