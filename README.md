@@ -31,11 +31,13 @@ This project implements a Laser Tag game system with a Python/Django webpage app
 > Run: ```source photonvenv/bin/activate```
 8. Install necessary packages
 > Run: ```pip install -r requirements.txt```
-9. Prime django for the database *Note that this doesn't effect the postgres database, it only tells Django how the database is formatted. This can be confirmed through the postgres terminal*:
+9. Prime django for the database *Note that this doesn't affect the postgres database, it only tells Django how the database is formatted. This can be confirmed through the postgres terminal*:
 > Run: ```cd team8proj/```
 > Run: ```python manage.py migrate```
 > > if this draws an error, 
 > > > run: ```python manage.py migrate --fake```
 10. Start application:
+>  *Before running application, ensure that your browser is not blocking audio*
+> > > 
 > Run: ```python manage.py runserver```
 > > Visit http://127.0.0.1:8000/ in your web browser to access the application
