@@ -68,7 +68,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'team8proj.wsgi.application'
-ASGI_APPLICATION = 'team8proj.asgi.application'  # Add this line
+ASGI_APPLICATION = 'team8proj.asgi.application'  
 
 # Channel layers configuration
 CHANNEL_LAYERS = {
