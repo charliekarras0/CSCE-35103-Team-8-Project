@@ -9,4 +9,6 @@ urlpatterns = [
     path("hud/", views.hud_view, name="hud_view"),  # New HUD view URL
     path('assign_teams_equipment/', views.assign_teams_equipment, name='assign_teams_equipment'), 
     path('remove_players/', views.remove_players, name='remove_players'),
+    path('trigger-udp-broadcast/', views.trigger_udp_broadcast, name='trigger_udp_broadcast'),
+    path('get_scores/', views.get_scores, name='get_scores'),
 ]
