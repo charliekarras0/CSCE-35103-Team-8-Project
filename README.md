@@ -22,7 +22,7 @@ This project implements a Laser Tag game system with a Python/Django webpage app
 > Run: ```cd Downloads/CSCETeam8App/CSCETeam8App/```
 *Assuming you downloaded the file into the Downloads folder. If not, adapt appropriately: cd ```path_to_dir/CSCETeam8App/CSCETeam8App```*
 4. Install python
-> Run: ```sudo apt install python```
+> Run: ```sudo apt install python3```
 6. Install pip 
 > Run: ```sudo apt install python3-pip```
 7. Create virtual environment
