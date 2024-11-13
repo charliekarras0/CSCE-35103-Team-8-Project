@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaserTag Scoreboard</title>
-    <!-- Google Font for Arcade Style -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,6 +13,20 @@
             color: #ffffff; /* White text color */
             text-align: center; /* Center align text */
             padding: 20px; /* General padding */
+        }
+        #end-game-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00ff00; /* Green button color */
+            color: #000000; /* Button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            display: none; /* Initially hidden */
         }
         #countdown-timer {
             font-size: 24px; /* Font size for the timer */
@@ -27,23 +41,10 @@
             margin-bottom: 5px; /* Space between label and timer */
             text-shadow: 1px 1px 2px #000000; /* Shadow for depth */
         }
-
-        #countdown-timer {
-            font-size: 24px; /* Font size for the timer */
-            color: #00ff00; /* Green color for the timer text */
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            padding: 10px; /* Padding for the timer box */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
-            transition: background 0.3s; /* Smooth background transition */
-        }
-        
-
         h1 {
             font-size: 36px; /* Title size */
             margin-bottom: 20px; /* Space below title */
         }
-
         .team {
             display: inline-block;
             width: 45%;
@@ -51,26 +52,21 @@
             padding: 20px;
             border-radius: 8px; /* Rounded corners */
         }
-
         .red-team {
             background-color: #ff4d4d; /* Red team background */
         }
-
         .blue-team {
             background-color: #4d94ff; /* Blue team background */
         }
-
         .team h2 {
             text-align: center;
             font-size: 24px; /* Size for team headers */
             margin-bottom: 10px; /* Space below headers */
         }
-
         .team ul {
             list-style-type: none;
             padding: 0;
         }
-
         .team ul li {
             padding: 10px;
             background-color: #ffffff; /* White list items */
@@ -79,7 +75,6 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
             color: black; /* Change the font color of player names to black */
         }
-
         .message-container {
             position: fixed;
             bottom: 10px;
@@ -94,54 +89,91 @@
             overflow-y: auto; /* Enable vertical scrolling */
             width: 80%; /* Adjust the width as needed */
         }
-
         .message {
             margin-bottom: 5px; /* Add space between messages */
         }
+        .special-event {
+            color: #ffd700; /* Gold color for special event indicator */
+            font-weight: bold; /* Bold text */
+        }
+        .flashing {
+			animation: flash 1s infinite;
+		}
+
+		@keyframes flash {
+			0% { opacity: 1; }
+			50% { opacity: 0; }
+			100% { opacity: 1; }
+		}
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background-color: black;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
     </style>
 </head>
 <body>
-	<div id="countdown-container">
-		<div id="countdown-label">Game Starts in:</div>
-		<div id="countdown-timer">30</div>
-	</div>
-	
-	
+	<audio id="background-audio" src="{% static mp3_file %}"></audio>
+    <div id="countdown-container">
+        <div id="countdown-label">Game Starts in:</div>
+        <div id="countdown-timer">30</div>
+    </div>
+
     <h1>Photon LaserTag Scoreboard</h1>
 
     <div class="team red-team">
         <h2>Red Team</h2>
-        <ul>
-            <!-- Updated iteration to include player and score -->
-            {% for player, score in red_team %}
-                <li>{{ player.codename }}   -  {{ score }}</li> <!-- Display codename and score -->
-            {% empty %}
-                <li>No players in Red Team</li>
-            {% endfor %}
+        <ul id="red-team-list">
+	{% for player, score, base in red_team %}
+		<li>
+			{% if base %} <span class="special-event">B</span>{% endif %}
+			{{ player.codename }} - {{ score }}
+		</li>
+	{% empty %}
+		<li>No players in Red Team</li>
+	{% endfor %}
         </ul>
+        <p id="red-team-score" class="{% if red_team_score > blue_team_score %}flashing{% endif %}">
+			Team Score: {{ red_team_score }}
+		</p> 
     </div>
 
     <div class="team blue-team">
         <h2>Blue Team</h2>
-        <ul>
-            <!-- Updated iteration to include player and score -->
-            {% for player, score in blue_team %}
-                <li>{{ player.codename }}   -   {{ score }}</li> <!-- Display codename and score -->
-            {% empty %}
-                <li>No players in Blue Team</li>
-            {% endfor %}
+        <ul id="blue-team-list">
+            {% for player, score, base in blue_team %}
+		<li>
+			{% if base %} <span class="special-event">B</span>{% endif %}
+			{{ player.codename }} - {{ score }}
+		</li>
+	{% empty %}
+		<li>No players in Blue Team</li>
+	{% endfor %}
         </ul>
+        <p id="blue-team-score" class="{% if blue_team_score > red_team_score %}flashing{% endif %}">
+			Team Score: {{ blue_team_score }}
+		</p> 
     </div>
 
     <div class="hud-container">
-        <!-- Message container at the bottom -->
         <div class="message-container" id="message-container"></div>
     </div>
-
-    <!-- JavaScript Section -->
+	<button id="end-game-button" onclick="navigateToIndex()">Return to Main Menu</button>
+    <footer>
+        &copy; Retro Game. All rights reserved.
+    </footer>
     <script>
 		let countdownTime = 30; // Initialize countdown time in seconds
         let gameStarted = false; // Track if the game has started
+        let gameEnded = false;
 
         function updateTimer() {
             const timerElement = document.getElementById('countdown-timer');
@@ -150,67 +182,115 @@
             if (countdownTime > 0) {
                 countdownTime--; // Decrement the countdown time
             } else {
-                if (!gameStarted) {
-                    labelElement.innerText = "Game Timer"; // Change label text
-                    gameStarted = true; // Mark the game as started
+                if (gameStarted) {
+                    if (!gameEnded) {
+                        fetch('/trigger-udp-broadcast/');
+                        document.getElementById('end-game-button').style.display = 'block'; 
+                        gameEnded = true;
+                    }
                 }
-                countdownTime = 360; // Reset the countdown time
-                // Optionally call a function to send UDP code
-                // sendUDPCode(); // Uncomment if you want to send code at reset
+                if (!gameStarted) {
+                    labelElement.innerText = "Game Timer"; // Change label text                  
+                    gameStarted = true; // Mark the game as started
+                    countdownTime = 360; // Reset the countdown time
+                }
             }
             timerElement.innerText = countdownTime; // Update the timer display
         }
-
-        // Call updateTimer every second
+		function navigateToIndex() {
+			window.location.href = "/index"; // Adjust if the path to index is different
+		}
         setInterval(updateTimer, 1000);
-        
         
         function displayMessage(message) {
             var messageContainer = document.getElementById('message-container');
 
-            // Create a new div for each message
             var newMessage = document.createElement('div');
             newMessage.classList.add('message');
             newMessage.innerHTML = message;
 
-            // Append the new message to the message container
             messageContainer.appendChild(newMessage);
-
-            // Scroll to the bottom to show the latest message
             messageContainer.scrollTop = messageContainer.scrollHeight;
         }
 
-        // Loop through the messages passed from the backend and display each one
         {% for message in hit_messages %}
             displayMessage("{{ message }}");
         {% endfor %}
+        
+		function updateFlashingScores() {
+			const redScore = parseInt(document.getElementById("red-team-score").innerText.split(": ")[1]);
+			const blueScore = parseInt(document.getElementById("blue-team-score").innerText.split(": ")[1]);
+			
+			const redScoreElement = document.getElementById("red-team-score");
+			const blueScoreElement = document.getElementById("blue-team-score");
 
-        // WebSocket connection
-        const socket = new WebSocket('ws://localhost:8000/ws/scores/');
+			if (redScore > blueScore) {
+				redScoreElement.classList.add("flashing");
+				blueScoreElement.classList.remove("flashing");
+			} else if (blueScore > redScore) {
+				blueScoreElement.classList.add("flashing");
+				redScoreElement.classList.remove("flashing");
+			} else {
+				redScoreElement.classList.remove("flashing");
+				blueScoreElement.classList.remove("flashing");
+			}
+		}
 
-        socket.onmessage = function(event) {
-            const data = JSON.parse(event.data);
-            const transmittingEquipmentId = data.transmitting; // ID of the player transmitting
-            const hitEquipmentId = data.hit; // ID of the player hit
+		setInterval(updateFlashingScores, 1000);
+		
+		window.onload = function() {
+            const audio = document.getElementById('background-audio');
 
-            // Update the player's score and display a message
-            if (transmittingEquipmentId && hitEquipmentId) {
-                displayMessage(`Player ${transmittingEquipmentId} hit player ${hitEquipmentId}.`);
-                // Optionally, you can call a function to update scores in the HUD here
-            }
+            setTimeout(function() {
+				audio.play().catch(error => console.error("Error playing audio:", error));
+			}, 13000); 
         };
+        
+        // Function to fetch scores and update the HTML
+        function fetchScores() {
+            fetch('/get_scores/')
+                .then(response => response.json())
+                .then(data => {
+					console.log(data);
+                    // Update Red Team
+                    const redTeamList = document.getElementById('red-team-list');
+                    redTeamList.innerHTML = ''; // Clear existing list
+                    data.red_team.forEach(player => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `${player.codename} - ${player.score}`;
+                        if (player.base) li.innerHTML = `<span class="special-event">B</span> ${player.codename} - ${player.score}`;
+                        redTeamList.appendChild(li);
+                    });
+                    document.getElementById('red-team-score').innerText = `Team Score: ${data.red_team_score}`;
 
-        socket.onopen = function(event) {
-            console.log('WebSocket connection established.');
-        };
+                    // Update Blue Team
+                    const blueTeamList = document.getElementById('blue-team-list');
+                    blueTeamList.innerHTML = ''; // Clear existing list
+                    data.blue_team.forEach(player => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `${player.codename} - ${player.score}`;
+                        if (player.base) li.innerHTML = `<span class="special-event">B</span> ${player.codename} - ${player.score}`;
+                        blueTeamList.appendChild(li);
+                    });
+                    document.getElementById('blue-team-score').innerText = `Team Score: ${data.blue_team_score}`;
 
-        socket.onclose = function(event) {
-            console.log('WebSocket connection closed.');
-        };
+                    // Update hit messages
+                    const messageContainer = document.getElementById('message-container');
+                    messageContainer.innerHTML = ''; // Clear existing messages
+                    data.hit_messages.forEach(message => {
+                        const msgDiv = document.createElement('div');
+                        msgDiv.classList.add('message');
+                        msgDiv.innerText = message;
+                        messageContainer.appendChild(msgDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching scores:', error));
+        }
+        
 
-        socket.onerror = function(error) {
-            console.error('WebSocket error:', error);
-        };
-    </script>
+        // Fetch scores every second
+        setInterval(fetchScores, 1000);
+       
+		</script>
 </body>
 </html>
